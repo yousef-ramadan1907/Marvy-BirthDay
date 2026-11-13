@@ -623,3 +623,13 @@ input:focus {
   from { opacity: 0; transform: scale(.4) translateY(70px) rotate(-6deg); }
   to { opacity: 1; transform: none; }
 }
+
+/* إصلاح صفحة الورد على الموبايل عشان زرار الـ Back يظهر وما يختفيش */
+@media(max-width: 700px) {
+  .player.wide {
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    max-height: 85vh !important;
+    padding: 40px 16px 20px !important;
+  }
+}
