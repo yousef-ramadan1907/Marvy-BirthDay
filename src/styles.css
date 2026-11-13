@@ -24,7 +24,7 @@ body {
     height: 100%;
     position: relative;
     background: conic-gradient(#fbf0d8 25%, transparent 0 50%, #fbf0d8 0 75%, transparent 0) 0 0/110px 110px,
-        radial-gradient(circle at 30% 20%, #cfe0fb, #9bbcf0);
+        radial-gradient(circle at 30% 20%, #cfe0fb, #9bbcf0)
 }
 
 .page {
@@ -47,7 +47,8 @@ body {
 
 .stage {
     position: absolute;
-    inset: 0
+    inset: 0;
+    overflow: hidden
 }
 
 .big {
@@ -210,22 +211,21 @@ input:focus {
     background: #dbe7fb
 }
 
+/* ===== الصور ===== */
 .polaroid {
-    .polaroid {
-        position: absolute;
-        z-index: 3;
-        width: min(26vw, 34vh);
-        background: #fff;
-        padding: 10px 10px 34px;
-        box-shadow: 0 12px 30px #1b3a8a55;
-        transform: rotate(var(--rot));
-        animation: drop .9s both;
-        aspect-ratio: .85;
-    }
+    position: absolute;
+    z-index: 3;
+    width: min(26vw, 34vh);
+    aspect-ratio: .85;
+    background: #fff;
+    padding: 10px 10px 34px;
+    box-shadow: 0 12px 30px #1b3a8a55;
+    transform: rotate(var(--rot));
+    animation: drop .9s both
 }
 
 .polaroid img,
-.ph {
+.polaroid .ph {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -247,6 +247,12 @@ input:focus {
     transform: rotate(-4deg)
 }
 
+.photos .fx {
+    z-index: 1;
+    opacity: .6
+}
+
+/* ===== الموسيقى والورد ===== */
 .player {
     width: min(94vw, 820px);
     display: flex;
@@ -285,16 +291,6 @@ input:focus {
     box-shadow: 0 10px 30px #0006
 }
 
-@media(max-width:700px) {
-    .vinyl {
-        display: none
-    }
-
-    .player {
-        flex-direction: column
-    }
-}
-
 .wide {
     width: min(94vw, 860px)
 }
@@ -326,6 +322,7 @@ input:focus {
     margin: 0
 }
 
+/* ===== التورتة والكارت ===== */
 .cake {
     cursor: pointer;
     animation: float 2.6s infinite;
@@ -356,7 +353,7 @@ input:focus {
     width: 100%;
     height: calc(100% - 40px);
     border-radius: 6px;
-    filter: saturate(1.05) contrast(1.03);
+    filter: saturate(1.05) contrast(1.03)
 }
 
 .cap {
@@ -398,6 +395,7 @@ input:focus {
     white-space: pre-line
 }
 
+/* ===== البلالين واللمعان ===== */
 .fx {
     position: fixed;
     inset: 0;
@@ -447,6 +445,7 @@ input:focus {
     animation: burst 1.2s both
 }
 
+/* ===== الأنيميشن ===== */
 @keyframes fade {
     from {
         opacity: 0
@@ -576,24 +575,20 @@ input:focus {
 
 @media(prefers-reduced-motion:reduce) {
     * {
-        animation-duration: .01s !important;
+        animation-duration: .01s !important
     }
 }
 
-html,
-body,
-.bg,
-.page,
-.stage {
-    overflow-x: hidden
-}
-
-.photos .fx {
-    z-index: 1;
-    opacity: .6
-}
-
+/* ===== الموبايل (لازم يفضل في الآخر) ===== */
 @media(max-width:700px) {
+    .vinyl {
+        display: none
+    }
+
+    .player {
+        flex-direction: column
+    }
+
     .stage.photos {
         overflow-y: auto;
         display: grid;
