@@ -71,55 +71,68 @@ function Music({ go }) {
       <p className="script">Our song 💙</p></div><div className="vinyl" /></div></div>
 }
 function Flowers({ go }) {
-  return <div className="center"><div className="player wide"><Back go={go} />
-    <div className="list">{C.FLOWER_NOTES.map((t, i) => <div key={i} className="note" style={{ animationDelay: i * .18 + 's' }}>🌷 {t}</div>)}</div>
-    <div className="bq"><Bouquet w={300} h={380} /><p className="script">Flowers for you!</p></div></div></div>
+  return (
+    <div className="center">
+      <div className="player wide">
+        <Back go={go} />
+        <div className="list">
+          {C.FLOWER_NOTES.map((t, i) => (
+            <div key={i} className="note" style={{ animationDelay: i * .18 + 's' }}>🌷 {t}</div>
+          ))}
+        </div>
+        <div className="bq">
+          <Bouquet w={300} h={380} />
+          <p className="script">Flowers for you!</p>
+        </div>
+      </div>
+    </div>
+  )
 }
-function Cake({go}){
- const [out,setOut]=useState(false)
- const blow=()=>{setOut(true);setTimeout(()=>go('memory'),1700)}
- return (
-  <div className="center col">
-   <Back go={go}/>
-   {out&&<Sparkles n={30}/>}
-   <div className="cake" onClick={blow}>
-    <svg viewBox="0 0 220 240" width="300">
-     {[80,110,140].map(x=>(
-      <g key={x}>
-       <rect x={x-4} y="50" width="9" height="46" rx="3" fill="#5b82d6"/>
-       {!out&&<ellipse className="flame" cx={x} cy="40" rx="7" ry="13" fill="#ffc94a"/>}
-      </g>
-     ))}
-     <path d="M45 110 Q45 96 62 96 H158 Q175 96 175 110 V160 H45Z" fill="#fff6e3" stroke="#3558b0" strokeWidth="2"/>
-     <path d="M45 118 q14 14 28 0 t28 0 t28 0 t28 0 t26 0" fill="none" stroke="#7fa8ee" strokeWidth="5"/>
-     <ellipse cx="110" cy="168" rx="85" ry="16" fill="#a8c6f5" stroke="#3558b0" strokeWidth="2"/>
-     <path d="M45 160 H175 V166 H45Z" fill="#ecdcb8"/>
-     <path d="M110 148 c-8-8 4-14 8-6 c4-8 14-2 8 6 l-8 8z" fill="#3b63b8" transform="translate(-6 -6)"/>
-    </svg>
-   </div>
-   <p className="script sub">{out?'Make a wish… 💫':'Blow your candle, my baby!'}</p>
-  </div>
- )
+function Cake({ go }) {
+  const [out, setOut] = useState(false)
+  const blow = () => { setOut(true); setTimeout(() => go('memory'), 1700) }
+  return (
+    <div className="center col">
+      <Back go={go} />
+      {out && <Sparkles n={30} />}
+      <div className="cake" onClick={blow}>
+        <svg viewBox="0 0 220 240" width="300">
+          {[80, 110, 140].map(x => (
+            <g key={x}>
+              <rect x={x - 4} y="50" width="9" height="46" rx="3" fill="#5b82d6" />
+              {!out && <ellipse className="flame" cx={x} cy="40" rx="7" ry="13" fill="#ffc94a" />}
+            </g>
+          ))}
+          <path d="M45 110 Q45 96 62 96 H158 Q175 96 175 110 V160 H45Z" fill="#fff6e3" stroke="#3558b0" strokeWidth="2" />
+          <path d="M45 118 q14 14 28 0 t28 0 t28 0 t28 0 t26 0" fill="none" stroke="#7fa8ee" strokeWidth="5" />
+          <ellipse cx="110" cy="168" rx="85" ry="16" fill="#a8c6f5" stroke="#3558b0" strokeWidth="2" />
+          <path d="M45 160 H175 V166 H45Z" fill="#ecdcb8" />
+          <path d="M110 148 c-8-8 4-14 8-6 c4-8 14-2 8 6 l-8 8z" fill="#3b63b8" transform="translate(-6 -6)" />
+        </svg>
+      </div>
+      <p className="script sub">{out ? 'Make a wish… 💫' : 'Blow your candle, my baby!'}</p>
+    </div>
+  )
 }
-function Memory({go}){
- return <div className="stage memory"><Back go={go}/>
-  <Balloons n={8}/>
-  <div className="frame"><Pic src={C.KID_PHOTO}/><span className="script cap">happy birthday! my baby!</span></div>
-  <div className="letter"><h2 className="script">Happy birthday, baby!</h2><p>{C.LETTER}</p></div></div>
+function Memory({ go }) {
+  return <div className="stage memory"><Back go={go} />
+    <Balloons n={8} />
+    <div className="frame"><Pic src={C.KID_PHOTO} /><span className="script cap">happy birthday! my baby!</span></div>
+    <div className="letter"><h2 className="script">Happy birthday, baby!</h2><p>{C.LETTER}</p></div></div>
 }
-const PAGES={intro:Intro,login:Login,home:Home,menu:Menu,photos:Photos,music:Music,flowers:Flowers,cake:Cake,memory:Memory}
-export default function App(){
- const [s,setS]=useState('intro')
- const au=useRef(null)
- const play=()=>au.current&&au.current.play().catch(()=>{})
- const nav=(n)=>{
-  if(n==='burst')play()
-  else if(n==='music')au.current&&au.current.pause()
-  else if(s==='music')play()
-  setS(n)
- }
- useEffect(()=>{if(s==='burst'){const t=setTimeout(()=>setS('home'),5200);return()=>clearTimeout(t)}},[s])
- const P=PAGES[s]
- return <div className="bg"><audio ref={au} src="/song.mp3" loop preload="auto"/>
-  <div key={s} className="page">{s==='burst'?<div className="center col"><Balloons n={30} flowers={10}/><h1 className="script big rise">Welcome, Marvy 💙</h1></div>:<P go={nav}/>}</div></div>
+const PAGES = { intro: Intro, login: Login, home: Home, menu: Menu, photos: Photos, music: Music, flowers: Flowers, cake: Cake, memory: Memory }
+export default function App() {
+  const [s, setS] = useState('intro')
+  const au = useRef(null)
+  const play = () => au.current && au.current.play().catch(() => { })
+  const nav = (n) => {
+    if (n === 'burst') play()
+    else if (n === 'music') au.current && au.current.pause()
+    else if (s === 'music') play()
+    setS(n)
+  }
+  useEffect(() => { if (s === 'burst') { const t = setTimeout(() => setS('home'), 5200); return () => clearTimeout(t) } }, [s])
+  const P = PAGES[s]
+  return <div className="bg"><audio ref={au} src="/song.mp3" loop preload="auto" />
+    <div key={s} className="page">{s === 'burst' ? <div className="center col"><Balloons n={30} flowers={10} /><h1 className="script big rise">Welcome, Marvy 💙</h1></div> : <P go={nav} />}</div></div>
 }
